@@ -1,0 +1,662 @@
+﻿<dxr:DXRibbonWindow 
+    xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" 
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" 
+    xmlns:dxsps="http://schemas.devexpress.com/winfx/2008/xaml/spreadsheet" xmlns:Custom="http://schemas.devexpress.com/winfx/2008/xaml/richedit" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="DataBindingToListExample.MainWindow" Title="MainWindow" Height="600" Width="800" 
+    >
+    <dxr:DXRibbonWindow.Resources>
+        <dxsps:SpreadsheetUICommand x:Key="commands"/>
+        <dxsps:SpreadsheetStringIdConverter x:Key="stringIdConverter"/>
+    </dxr:DXRibbonWindow.Resources>
+    <Grid>
+        <dxb:BarManager x:Name="barManager1" ToolbarGlyphSize="Small">
+            <dxb:BarManager.Items>
+                <dxb:BarButtonItem x:Name="biFileNew" Command="{Binding FileNew, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFileOpen" Command="{Binding FileOpen, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFileSave" Command="{Binding FileSave, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFileSaveAs" Command="{Binding FileSaveAs, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFileQuickPrint" Command="{Binding FileQuickPrint, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFilePrint" Command="{Binding FilePrint, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFilePrintPreview" Command="{Binding FilePrintPreview, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFileUndo" Command="{Binding FileUndo, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFileRedo" Command="{Binding FileRedo, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFileEncrypt" Command="{Binding FileEncrypt, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFileShowDocumentProperties" Command="{Binding FileShowDocumentProperties, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biEditPaste" Command="{Binding EditPaste, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biEditCut" Command="{Binding EditCut, Mode=OneTime, Source={StaticResource commands}}" RibbonStyle="SmallWithText"/>
+                <dxb:BarButtonItem x:Name="biEditCopy" Command="{Binding EditCopy, Mode=OneTime, Source={StaticResource commands}}" RibbonStyle="SmallWithText"/>
+                <dxb:BarButtonItem x:Name="biEditPasteSpecial" Command="{Binding EditPasteSpecial, Mode=OneTime, Source={StaticResource commands}}" RibbonStyle="SmallWithText"/>
+                <dxr:BarButtonGroup x:Name="biFont">
+                    <dxr:BarButtonGroup.ItemLinks>
+                        <dxb:BarEditItemLink BarItemName="biFormatFontName"/>
+                        <dxb:BarEditItemLink BarItemName="biFormatFontSize"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatIncreaseFontSize"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatDecreaseFontSize"/>
+                    </dxr:BarButtonGroup.ItemLinks>
+                </dxr:BarButtonGroup>
+                <dxb:BarEditItem x:Name="biFormatFontName" Content="" Command="{Binding FormatFontName, Mode=OneTime, Source={StaticResource commands}}" EditWidth="150">
+                    <dxb:BarEditItem.EditSettings>
+                        <Custom:FontComboBoxEditSettings/>
+                    </dxb:BarEditItem.EditSettings>
+                </dxb:BarEditItem>
+                <dxb:BarEditItem x:Name="biFormatFontSize" Content="" Command="{Binding FormatFontSize, Mode=OneTime, Source={StaticResource commands}}" EditWidth="50">
+                    <dxb:BarEditItem.EditSettings>
+                        <Custom:FontSizeComboBoxEditSettings OfficeFontSizeProvider="{Binding ElementName=spreadsheetControl1}"/>
+                    </dxb:BarEditItem.EditSettings>
+                </dxb:BarEditItem>
+                <dxb:BarButtonItem x:Name="biFormatIncreaseFontSize" Command="{Binding FormatIncreaseFontSize, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatDecreaseFontSize" Command="{Binding FormatDecreaseFontSize, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxr:BarButtonGroup x:Name="biFontShape">
+                    <dxr:BarButtonGroup.ItemLinks>
+                        <dxb:BarCheckItemLink BarItemName="biFormatFontBold"/>
+                        <dxb:BarCheckItemLink BarItemName="biFormatFontItalic"/>
+                        <dxb:BarCheckItemLink BarItemName="biFormatFontUnderline"/>
+                        <dxb:BarCheckItemLink BarItemName="biFormatFontStrikeout"/>
+                    </dxr:BarButtonGroup.ItemLinks>
+                </dxr:BarButtonGroup>
+                <dxb:BarCheckItem x:Name="biFormatFontBold" Command="{Binding FormatFontBold, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarCheckItem x:Name="biFormatFontItalic" Command="{Binding FormatFontItalic, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarCheckItem x:Name="biFormatFontUnderline" Command="{Binding FormatFontUnderline, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarCheckItem x:Name="biFormatFontStrikeout" Command="{Binding FormatFontStrikeout, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxr:BarButtonGroup x:Name="biFontColor">
+                    <dxr:BarButtonGroup.ItemLinks>
+                        <Custom:BarSplitButtonColorEditItemLink BarItemName="biFormatFontColor"/>
+                        <Custom:BarSplitButtonColorEditItemLink BarItemName="biFormatFillColor"/>
+                    </dxr:BarButtonGroup.ItemLinks>
+                </dxr:BarButtonGroup>
+                <Custom:BarSplitButtonColorEditItem x:Name="biFormatFontColor" Command="{Binding FormatFontColor, Mode=OneTime, Source={StaticResource commands}}">
+                    <dxb:PopupControlContainerInfo>
+                        <dxe:ColorEdit EditValue="{Binding EditValue, ElementName=biFormatFontColor, Mode=TwoWay}" ShowBorder="False"/>
+                    </dxb:PopupControlContainerInfo>
+                </Custom:BarSplitButtonColorEditItem>
+                <Custom:BarSplitButtonColorEditItem x:Name="biFormatFillColor" Command="{Binding FormatFillColor, Mode=OneTime, Source={StaticResource commands}}">
+                    <dxb:PopupControlContainerInfo>
+                        <dxe:ColorEdit EditValue="{Binding EditValue, ElementName=biFormatFillColor, Mode=TwoWay}" ShowBorder="False"/>
+                    </dxb:PopupControlContainerInfo>
+                </Custom:BarSplitButtonColorEditItem>
+                <dxr:BarButtonGroup x:Name="bi">
+                    <dxr:BarButtonGroup.ItemLinks>
+                        <dxb:BarSubItemLink BarItemName="biFormatBordersCommandGroup"/>
+                    </dxr:BarButtonGroup.ItemLinks>
+                </dxr:BarButtonGroup>
+                <dxb:BarSubItem x:Name="biFormatBordersCommandGroup" Command="{Binding FormatBordersCommandGroup, Mode=OneTime, Source={StaticResource commands}}" RibbonStyle="SmallWithoutText">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biFormatBottomBorder"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatTopBorder"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatLeftBorder"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatRightBorder"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatNoBorders"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatAllBorders"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatOutsideBorders"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatThickBorder"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatBottomDoubleBorder"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatBottomThickBorder"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatTopAndBottomBorder"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatTopAndThickBottomBorder"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatTopAndDoubleBottomBorder"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem x:Name="biFormatBottomBorder" Command="{Binding FormatBottomBorder, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatTopBorder" Command="{Binding FormatTopBorder, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatLeftBorder" Command="{Binding FormatLeftBorder, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatRightBorder" Command="{Binding FormatRightBorder, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatNoBorders" Command="{Binding FormatNoBorders, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatAllBorders" Command="{Binding FormatAllBorders, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatOutsideBorders" Command="{Binding FormatOutsideBorders, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatThickBorder" Command="{Binding FormatThickBorder, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatBottomDoubleBorder" Command="{Binding FormatBottomDoubleBorder, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatBottomThickBorder" Command="{Binding FormatBottomThickBorder, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatTopAndBottomBorder" Command="{Binding FormatTopAndBottomBorder, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatTopAndThickBottomBorder" Command="{Binding FormatTopAndThickBottomBorder, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatTopAndDoubleBottomBorder" Command="{Binding FormatTopAndDoubleBottomBorder, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxr:BarButtonGroup x:Name="biVerticalAlignment">
+                    <dxr:BarButtonGroup.ItemLinks>
+                        <dxb:BarCheckItemLink BarItemName="biFormatAlignmentTop"/>
+                        <dxb:BarCheckItemLink BarItemName="biFormatAlignmentMiddle"/>
+                        <dxb:BarCheckItemLink BarItemName="biFormatAlignmentBottom"/>
+                    </dxr:BarButtonGroup.ItemLinks>
+                </dxr:BarButtonGroup>
+                <dxb:BarCheckItem x:Name="biFormatAlignmentTop" Command="{Binding FormatAlignmentTop, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarCheckItem x:Name="biFormatAlignmentMiddle" Command="{Binding FormatAlignmentMiddle, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarCheckItem x:Name="biFormatAlignmentBottom" Command="{Binding FormatAlignmentBottom, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxr:BarButtonGroup x:Name="biHorizontalAlignment">
+                    <dxr:BarButtonGroup.ItemLinks>
+                        <dxb:BarCheckItemLink BarItemName="biFormatAlignmentLeft"/>
+                        <dxb:BarCheckItemLink BarItemName="biFormatAlignmentCenter"/>
+                        <dxb:BarCheckItemLink BarItemName="biFormatAlignmentRight"/>
+                    </dxr:BarButtonGroup.ItemLinks>
+                </dxr:BarButtonGroup>
+                <dxb:BarCheckItem x:Name="biFormatAlignmentLeft" Command="{Binding FormatAlignmentLeft, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarCheckItem x:Name="biFormatAlignmentCenter" Command="{Binding FormatAlignmentCenter, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarCheckItem x:Name="biFormatAlignmentRight" Command="{Binding FormatAlignmentRight, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxr:BarButtonGroup x:Name="biIndent">
+                    <dxr:BarButtonGroup.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biFormatDecreaseIndent"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatIncreaseIndent"/>
+                    </dxr:BarButtonGroup.ItemLinks>
+                </dxr:BarButtonGroup>
+                <dxb:BarButtonItem x:Name="biFormatDecreaseIndent" Command="{Binding FormatDecreaseIndent, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatIncreaseIndent" Command="{Binding FormatIncreaseIndent, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarCheckItem x:Name="biFormatWrapText" Command="{Binding FormatWrapText, Mode=OneTime, Source={StaticResource commands}}" RibbonStyle="SmallWithText"/>
+                <dxb:BarSubItem x:Name="biEditingMergeCellsCommandGroup" Command="{Binding EditingMergeCellsCommandGroup, Mode=OneTime, Source={StaticResource commands}}" RibbonStyle="SmallWithText">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarCheckItemLink BarItemName="biEditingMergeAndCenterCells"/>
+                        <dxb:BarButtonItemLink BarItemName="biEditingMergeCellsAcross"/>
+                        <dxb:BarButtonItemLink BarItemName="biEditingMergeCells"/>
+                        <dxb:BarButtonItemLink BarItemName="biEditingUnmergeCells"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarCheckItem x:Name="biEditingMergeAndCenterCells" Command="{Binding EditingMergeAndCenterCells, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biEditingMergeCellsAcross" Command="{Binding EditingMergeCellsAcross, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biEditingMergeCells" Command="{Binding EditingMergeCells, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biEditingUnmergeCells" Command="{Binding EditingUnmergeCells, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxr:BarButtonGroup x:Name="biFormatNumbers">
+                    <dxr:BarButtonGroup.ItemLinks>
+                        <dxb:BarSubItemLink BarItemName="biFormatNumberAccountingCommandGroup"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatNumberPercent"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatNumberAccounting"/>
+                    </dxr:BarButtonGroup.ItemLinks>
+                </dxr:BarButtonGroup>
+                <dxb:BarSubItem x:Name="biFormatNumberAccountingCommandGroup" Command="{Binding FormatNumberAccountingCommandGroup, Mode=OneTime, Source={StaticResource commands}}" RibbonStyle="SmallWithoutText">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biFormatNumberAccountingUS"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatNumberAccountingUK"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatNumberAccountingEuro"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatNumberAccountingPRC"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatNumberAccountingSwiss"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem x:Name="biFormatNumberAccountingUS" Command="{Binding FormatNumberAccountingUS, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatNumberAccountingUK" Command="{Binding FormatNumberAccountingUK, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatNumberAccountingEuro" Command="{Binding FormatNumberAccountingEuro, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatNumberAccountingPRC" Command="{Binding FormatNumberAccountingPRC, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatNumberAccountingSwiss" Command="{Binding FormatNumberAccountingSwiss, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatNumberPercent" Command="{Binding FormatNumberPercent, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatNumberAccounting" Command="{Binding FormatNumberAccounting, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxr:BarButtonGroup x:Name="biFormatNumberDecimals">
+                    <dxr:BarButtonGroup.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biFormatNumberIncreaseDecimal"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatNumberDecreaseDecimal"/>
+                    </dxr:BarButtonGroup.ItemLinks>
+                </dxr:BarButtonGroup>
+                <dxb:BarButtonItem x:Name="biFormatNumberIncreaseDecimal" Command="{Binding FormatNumberIncreaseDecimal, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatNumberDecreaseDecimal" Command="{Binding FormatNumberDecreaseDecimal, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarSubItem x:Name="biConditionalFormattingCommandGroup" Command="{Binding ConditionalFormattingCommandGroup, Mode=OneTime, Source={StaticResource commands}}">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarSubItemLink BarItemName="biConditionalFormattingHighlightCellsCommandGroup"/>
+                        <dxb:BarSubItemLink BarItemName="biConditionalFormattingTopBottomCommandGroup"/>
+                        <dxb:BarSubItemLink BarItemName="biConditionalFormattingDataBarsCommandGroup"/>
+                        <dxb:BarSubItemLink BarItemName="biConditionalFormattingColorScalesCommandGroup"/>
+                        <dxb:BarSubItemLink BarItemName="biConditionalFormattingIconSetsCommandGroup"/>
+                        <dxb:BarButtonItemLink BarItemName="biNewConditionalFormattingRule"/>
+                        <dxb:BarSubItemLink BarItemName="biConditionalFormattingRemoveCommandGroup"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarSubItem x:Name="biConditionalFormattingHighlightCellsCommandGroup" Command="{Binding ConditionalFormattingHighlightCellsCommandGroup, Mode=OneTime, Source={StaticResource commands}}">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingGreaterThan"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingLessThan"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingBetween"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingEqual"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingTextContains"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingDateOccurring"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingDuplicateValues"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingGreaterThan" Command="{Binding ConditionalFormattingGreaterThan, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingLessThan" Command="{Binding ConditionalFormattingLessThan, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingBetween" Command="{Binding ConditionalFormattingBetween, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingEqual" Command="{Binding ConditionalFormattingEqual, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingTextContains" Command="{Binding ConditionalFormattingTextContains, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingDateOccurring" Command="{Binding ConditionalFormattingDateOccurring, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingDuplicateValues" Command="{Binding ConditionalFormattingDuplicateValues, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarSubItem x:Name="biConditionalFormattingTopBottomCommandGroup" Command="{Binding ConditionalFormattingTopBottomCommandGroup, Mode=OneTime, Source={StaticResource commands}}">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingTop10Items"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingTop10Percent"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingBottom10Items"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingBottom10Percent"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingAboveAverage"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingBelowAverage"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingTop10Items" Command="{Binding ConditionalFormattingTop10Items, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingTop10Percent" Command="{Binding ConditionalFormattingTop10Percent, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingBottom10Items" Command="{Binding ConditionalFormattingBottom10Items, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingBottom10Percent" Command="{Binding ConditionalFormattingBottom10Percent, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingAboveAverage" Command="{Binding ConditionalFormattingAboveAverage, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingBelowAverage" Command="{Binding ConditionalFormattingBelowAverage, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarSubItem x:Name="biConditionalFormattingDataBarsCommandGroup" Command="{Binding ConditionalFormattingDataBarsCommandGroup, Mode=OneTime, Source={StaticResource commands}}">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarSubItemLink BarItemName="biConditionalFormattingDataBarsGradientFillCommandGroup"/>
+                        <dxb:BarSubItemLink BarItemName="biConditionalFormattingDataBarsSolidFillCommandGroup"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarSubItem x:Name="biConditionalFormattingDataBarsGradientFillCommandGroup" Command="{Binding ConditionalFormattingDataBarsGradientFillCommandGroup, Mode=OneTime, Source={StaticResource commands}}">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingDataBarGradientBlue"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingDataBarGradientGreen"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingDataBarGradientRed"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingDataBarGradientOrange"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingDataBarGradientLightBlue"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingDataBarGradientPurple"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingDataBarGradientBlue" Command="{Binding ConditionalFormattingDataBarGradientBlue, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingDataBarGradientGreen" Command="{Binding ConditionalFormattingDataBarGradientGreen, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingDataBarGradientRed" Command="{Binding ConditionalFormattingDataBarGradientRed, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingDataBarGradientOrange" Command="{Binding ConditionalFormattingDataBarGradientOrange, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingDataBarGradientLightBlue" Command="{Binding ConditionalFormattingDataBarGradientLightBlue, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingDataBarGradientPurple" Command="{Binding ConditionalFormattingDataBarGradientPurple, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarSubItem x:Name="biConditionalFormattingDataBarsSolidFillCommandGroup" Command="{Binding ConditionalFormattingDataBarsSolidFillCommandGroup, Mode=OneTime, Source={StaticResource commands}}">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingDataBarSolidBlue"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingDataBarSolidGreen"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingDataBarSolidRed"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingDataBarSolidOrange"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingDataBarSolidLightBlue"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingDataBarSolidPurple"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingDataBarSolidBlue" Command="{Binding ConditionalFormattingDataBarSolidBlue, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingDataBarSolidGreen" Command="{Binding ConditionalFormattingDataBarSolidGreen, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingDataBarSolidRed" Command="{Binding ConditionalFormattingDataBarSolidRed, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingDataBarSolidOrange" Command="{Binding ConditionalFormattingDataBarSolidOrange, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingDataBarSolidLightBlue" Command="{Binding ConditionalFormattingDataBarSolidLightBlue, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingDataBarSolidPurple" Command="{Binding ConditionalFormattingDataBarSolidPurple, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarSubItem x:Name="biConditionalFormattingColorScalesCommandGroup" Command="{Binding ConditionalFormattingColorScalesCommandGroup, Mode=OneTime, Source={StaticResource commands}}">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingColorScaleGreenYellowRed"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingColorScaleRedYellowGreen"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingColorScaleGreenWhiteRed"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingColorScaleRedWhiteGreen"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingColorScaleBlueWhiteRed"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingColorScaleRedWhiteBlue"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingColorScaleWhiteRed"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingColorScaleRedWhite"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingColorScaleGreenWhite"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingColorScaleWhiteGreen"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingColorScaleGreenYellow"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingColorScaleYellowGreen"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingColorScaleGreenYellowRed" Command="{Binding ConditionalFormattingColorScaleGreenYellowRed, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingColorScaleRedYellowGreen" Command="{Binding ConditionalFormattingColorScaleRedYellowGreen, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingColorScaleGreenWhiteRed" Command="{Binding ConditionalFormattingColorScaleGreenWhiteRed, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingColorScaleRedWhiteGreen" Command="{Binding ConditionalFormattingColorScaleRedWhiteGreen, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingColorScaleBlueWhiteRed" Command="{Binding ConditionalFormattingColorScaleBlueWhiteRed, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingColorScaleRedWhiteBlue" Command="{Binding ConditionalFormattingColorScaleRedWhiteBlue, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingColorScaleWhiteRed" Command="{Binding ConditionalFormattingColorScaleWhiteRed, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingColorScaleRedWhite" Command="{Binding ConditionalFormattingColorScaleRedWhite, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingColorScaleGreenWhite" Command="{Binding ConditionalFormattingColorScaleGreenWhite, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingColorScaleWhiteGreen" Command="{Binding ConditionalFormattingColorScaleWhiteGreen, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingColorScaleGreenYellow" Command="{Binding ConditionalFormattingColorScaleGreenYellow, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingColorScaleYellowGreen" Command="{Binding ConditionalFormattingColorScaleYellowGreen, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarSubItem x:Name="biConditionalFormattingIconSetsCommandGroup" Command="{Binding ConditionalFormattingIconSetsCommandGroup, Mode=OneTime, Source={StaticResource commands}}">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarSubItemLink BarItemName="biConditionalFormattingIconSetsDirectionalCommandGroup"/>
+                        <dxb:BarSubItemLink BarItemName="biConditionalFormattingIconSetsShapesCommandGroup"/>
+                        <dxb:BarSubItemLink BarItemName="biConditionalFormattingIconSetsIndicatorsCommandGroup"/>
+                        <dxb:BarSubItemLink BarItemName="biConditionalFormattingIconSetsRatingsCommandGroup"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarSubItem x:Name="biConditionalFormattingIconSetsDirectionalCommandGroup" Command="{Binding ConditionalFormattingIconSetsDirectionalCommandGroup, Mode=OneTime, Source={StaticResource commands}}">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingIconSetArrows3Colored"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingIconSetArrows3Grayed"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingIconSetArrows4Colored"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingIconSetArrows4Grayed"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingIconSetArrows5Colored"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingIconSetArrows5Grayed"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingIconSetTriangles3"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingIconSetArrows3Colored" Command="{Binding ConditionalFormattingIconSetArrows3Colored, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingIconSetArrows3Grayed" Command="{Binding ConditionalFormattingIconSetArrows3Grayed, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingIconSetArrows4Colored" Command="{Binding ConditionalFormattingIconSetArrows4Colored, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingIconSetArrows4Grayed" Command="{Binding ConditionalFormattingIconSetArrows4Grayed, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingIconSetArrows5Colored" Command="{Binding ConditionalFormattingIconSetArrows5Colored, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingIconSetArrows5Grayed" Command="{Binding ConditionalFormattingIconSetArrows5Grayed, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingIconSetTriangles3" Command="{Binding ConditionalFormattingIconSetTriangles3, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarSubItem x:Name="biConditionalFormattingIconSetsShapesCommandGroup" Command="{Binding ConditionalFormattingIconSetsShapesCommandGroup, Mode=OneTime, Source={StaticResource commands}}">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingIconSetTrafficLights3"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingIconSetTrafficLights3Rimmed"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingIconSetTrafficLights4"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingIconSetSigns3"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingIconSetRedToBlack"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingIconSetTrafficLights3" Command="{Binding ConditionalFormattingIconSetTrafficLights3, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingIconSetTrafficLights3Rimmed" Command="{Binding ConditionalFormattingIconSetTrafficLights3Rimmed, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingIconSetTrafficLights4" Command="{Binding ConditionalFormattingIconSetTrafficLights4, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingIconSetSigns3" Command="{Binding ConditionalFormattingIconSetSigns3, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingIconSetRedToBlack" Command="{Binding ConditionalFormattingIconSetRedToBlack, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarSubItem x:Name="biConditionalFormattingIconSetsIndicatorsCommandGroup" Command="{Binding ConditionalFormattingIconSetsIndicatorsCommandGroup, Mode=OneTime, Source={StaticResource commands}}">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingIconSetSymbols3Circled"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingIconSetSymbols3"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingIconSetFlags3"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingIconSetSymbols3Circled" Command="{Binding ConditionalFormattingIconSetSymbols3Circled, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingIconSetSymbols3" Command="{Binding ConditionalFormattingIconSetSymbols3, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingIconSetFlags3" Command="{Binding ConditionalFormattingIconSetFlags3, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarSubItem x:Name="biConditionalFormattingIconSetsRatingsCommandGroup" Command="{Binding ConditionalFormattingIconSetsRatingsCommandGroup, Mode=OneTime, Source={StaticResource commands}}">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingIconSetStars3"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingIconSetRatings4"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingIconSetRatings5"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingIconSetQuarters5"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingIconSetBoxes5"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingIconSetStars3" Command="{Binding ConditionalFormattingIconSetStars3, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingIconSetRatings4" Command="{Binding ConditionalFormattingIconSetRatings4, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingIconSetRatings5" Command="{Binding ConditionalFormattingIconSetRatings5, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingIconSetQuarters5" Command="{Binding ConditionalFormattingIconSetQuarters5, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingIconSetBoxes5" Command="{Binding ConditionalFormattingIconSetBoxes5, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biNewConditionalFormattingRule" Command="{Binding NewConditionalFormattingRule, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarSubItem x:Name="biConditionalFormattingRemoveCommandGroup" Command="{Binding ConditionalFormattingRemoveCommandGroup, Mode=OneTime, Source={StaticResource commands}}">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingRemoveFromSheet"/>
+                        <dxb:BarButtonItemLink BarItemName="biConditionalFormattingRemove"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingRemoveFromSheet" Command="{Binding ConditionalFormattingRemoveFromSheet, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biConditionalFormattingRemove" Command="{Binding ConditionalFormattingRemove, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarSubItem x:Name="biInsertCellsCommandGroup" Command="{Binding InsertCellsCommandGroup, Mode=OneTime, Source={StaticResource commands}}">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biInsertSheetRows"/>
+                        <dxb:BarButtonItemLink BarItemName="biInsertSheetColumns"/>
+                        <dxb:BarButtonItemLink BarItemName="biInsertSheet"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem x:Name="biInsertSheetRows" Command="{Binding InsertSheetRows, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biInsertSheetColumns" Command="{Binding InsertSheetColumns, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biInsertSheet" Command="{Binding InsertSheet, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarSubItem x:Name="biRemoveCellsCommandGroup" Command="{Binding RemoveCellsCommandGroup, Mode=OneTime, Source={StaticResource commands}}">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biRemoveSheetRows"/>
+                        <dxb:BarButtonItemLink BarItemName="biRemoveSheetColumns"/>
+                        <dxb:BarButtonItemLink BarItemName="biRemoveSheet"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem x:Name="biRemoveSheetRows" Command="{Binding RemoveSheetRows, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biRemoveSheetColumns" Command="{Binding RemoveSheetColumns, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biRemoveSheet" Command="{Binding RemoveSheet, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarSubItem x:Name="biFormatCommandGroup" Command="{Binding FormatCommandGroup, Mode=OneTime, Source={StaticResource commands}}">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biFormatRowHeight"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatAutoFitRowHeight"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatColumnWidth"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatAutoFitColumnWidth"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatDefaultColumnWidth"/>
+                        <dxb:BarSubItemLink BarItemName="biFormatHideAndUnhideCommandGroup"/>
+                        <dxb:BarButtonItemLink BarItemName="biRenameSheet"/>
+                        <dxb:BarButtonItemLink BarItemName="biMoveOrCopySheet"/>
+                        <Custom:BarButtonColorEditItemLink BarItemName="biFormatTabColor"/>
+                        <dxb:BarButtonItemLink BarItemName="biReviewProtectSheet"/>
+                        <dxb:BarCheckItemLink BarItemName="biFormatCellLocked"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatCells"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem x:Name="biFormatRowHeight" Command="{Binding FormatRowHeight, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatAutoFitRowHeight" Command="{Binding FormatAutoFitRowHeight, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatColumnWidth" Command="{Binding FormatColumnWidth, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatAutoFitColumnWidth" Command="{Binding FormatAutoFitColumnWidth, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatDefaultColumnWidth" Command="{Binding FormatDefaultColumnWidth, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarSubItem x:Name="biFormatHideAndUnhideCommandGroup" Command="{Binding FormatHideAndUnhideCommandGroup, Mode=OneTime, Source={StaticResource commands}}">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biFormatHideRows"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatHideColumns"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatHideSheet"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatUnhideRows"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatUnhideColumns"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatUnhideSheet"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem x:Name="biFormatHideRows" Command="{Binding FormatHideRows, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatHideColumns" Command="{Binding FormatHideColumns, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatHideSheet" Command="{Binding FormatHideSheet, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatUnhideRows" Command="{Binding FormatUnhideRows, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatUnhideColumns" Command="{Binding FormatUnhideColumns, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatUnhideSheet" Command="{Binding FormatUnhideSheet, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biRenameSheet" Command="{Binding RenameSheet, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biMoveOrCopySheet" Command="{Binding MoveOrCopySheet, Mode=OneTime, Source={StaticResource commands}}"/>
+                <Custom:BarButtonColorEditItem x:Name="biFormatTabColor" Command="{Binding FormatTabColor, Mode=OneTime, Source={StaticResource commands}}">
+                    <dxb:PopupControlContainerInfo>
+                        <dxe:ColorEdit EditValue="{Binding EditValue, ElementName=biFormatTabColor, Mode=TwoWay}" ShowDefaultColorButton="False" ShowNoColorButton="True" ShowBorder="False"/>
+                    </dxb:PopupControlContainerInfo>
+                </Custom:BarButtonColorEditItem>
+                <dxb:BarButtonItem x:Name="biReviewProtectSheet" Command="{Binding ReviewProtectSheet, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarCheckItem x:Name="biFormatCellLocked" Command="{Binding FormatCellLocked, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatCells" Command="{Binding FormatCells, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarSubItem x:Name="biEditingAutoSumCommandGroup" Command="{Binding EditingAutoSumCommandGroup, Mode=OneTime, Source={StaticResource commands}}" RibbonStyle="SmallWithText">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biFunctionsInsertSum"/>
+                        <dxb:BarButtonItemLink BarItemName="biFunctionsInsertAverage"/>
+                        <dxb:BarButtonItemLink BarItemName="biFunctionsInsertCountNumbers"/>
+                        <dxb:BarButtonItemLink BarItemName="biFunctionsInsertMax"/>
+                        <dxb:BarButtonItemLink BarItemName="biFunctionsInsertMin"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem x:Name="biFunctionsInsertSum" Command="{Binding FunctionsInsertSum, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFunctionsInsertAverage" Command="{Binding FunctionsInsertAverage, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFunctionsInsertCountNumbers" Command="{Binding FunctionsInsertCountNumbers, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFunctionsInsertMax" Command="{Binding FunctionsInsertMax, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFunctionsInsertMin" Command="{Binding FunctionsInsertMin, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarSubItem x:Name="biEditingFillCommandGroup" Command="{Binding EditingFillCommandGroup, Mode=OneTime, Source={StaticResource commands}}" RibbonStyle="SmallWithText">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biEditingFillDown"/>
+                        <dxb:BarButtonItemLink BarItemName="biEditingFillRight"/>
+                        <dxb:BarButtonItemLink BarItemName="biEditingFillUp"/>
+                        <dxb:BarButtonItemLink BarItemName="biEditingFillLeft"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem x:Name="biEditingFillDown" Command="{Binding EditingFillDown, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biEditingFillRight" Command="{Binding EditingFillRight, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biEditingFillUp" Command="{Binding EditingFillUp, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biEditingFillLeft" Command="{Binding EditingFillLeft, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarSubItem x:Name="biFormatClearCommandGroup" Command="{Binding FormatClearCommandGroup, Mode=OneTime, Source={StaticResource commands}}" RibbonStyle="SmallWithText">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biFormatClearAll"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatClearFormats"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatClearContents"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatClearComments"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatClearHyperlinks"/>
+                        <dxb:BarButtonItemLink BarItemName="biFormatRemoveHyperlinks"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem x:Name="biFormatClearAll" Command="{Binding FormatClearAll, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatClearFormats" Command="{Binding FormatClearFormats, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatClearContents" Command="{Binding FormatClearContents, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatClearComments" Command="{Binding FormatClearComments, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatClearHyperlinks" Command="{Binding FormatClearHyperlinks, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biFormatRemoveHyperlinks" Command="{Binding FormatRemoveHyperlinks, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarSubItem x:Name="biEditingSortAndFilterCommandGroup" Command="{Binding EditingSortAndFilterCommandGroup, Mode=OneTime, Source={StaticResource commands}}">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biEditingDataSortAscending"/>
+                        <dxb:BarButtonItemLink BarItemName="biEditingDataSortDescending"/>
+                        <dxb:BarCheckItemLink BarItemName="biDataFilterToggle"/>
+                        <dxb:BarButtonItemLink BarItemName="biDataFilterClear"/>
+                        <dxb:BarButtonItemLink BarItemName="biDataFilterReApply"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem x:Name="biEditingDataSortAscending" Command="{Binding DataSortAscending, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biEditingDataSortDescending" Command="{Binding DataSortDescending, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarCheckItem x:Name="biDataFilterToggle" Command="{Binding DataFilterToggle, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biDataFilterClear" Command="{Binding DataFilterClear, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biDataFilterReApply" Command="{Binding DataFilterReApply, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarSubItem x:Name="biEditingFindAndSelectCommandGroup" Command="{Binding EditingFindAndSelectCommandGroup, Mode=OneTime, Source={StaticResource commands}}">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biEditingFind"/>
+                        <dxb:BarButtonItemLink BarItemName="biEditingReplace"/>
+                        <dxb:BarButtonItemLink BarItemName="biEditingSelectFormulas"/>
+                        <dxb:BarButtonItemLink BarItemName="biEditingSelectComments"/>
+                        <dxb:BarButtonItemLink BarItemName="biEditingSelectConditionalFormatting"/>
+                        <dxb:BarButtonItemLink BarItemName="biEditingSelectConstants"/>
+                        <dxb:BarButtonItemLink BarItemName="biEditingSelectDataValidation"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem x:Name="biEditingFind" Command="{Binding EditingFind, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biEditingReplace" Command="{Binding EditingReplace, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biEditingSelectFormulas" Command="{Binding EditingSelectFormulas, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biEditingSelectComments" Command="{Binding EditingSelectComments, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biEditingSelectConditionalFormatting" Command="{Binding EditingSelectConditionalFormatting, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biEditingSelectConstants" Command="{Binding EditingSelectConstants, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biEditingSelectDataValidation" Command="{Binding EditingSelectDataValidation, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biDataSortAscending" Command="{Binding DataSortAscending, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biDataSortDescending" Command="{Binding DataSortDescending, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarSubItem x:Name="biDataValidationCommandGroup" Command="{Binding DataValidationCommandGroup, Mode=OneTime, Source={StaticResource commands}}">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biDataValidation"/>
+                        <dxb:BarButtonItemLink BarItemName="biDataCircleValidationInvalidData"/>
+                        <dxb:BarButtonItemLink BarItemName="biDataClearValidationCircles"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem x:Name="biDataValidation" Command="{Binding DataValidation, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biDataCircleValidationInvalidData" Command="{Binding DataCircleValidationInvalidData, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biDataClearValidationCircles" Command="{Binding DataClearValidationCircles, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarSubItem x:Name="biDataOutlineGroupCommandGroup" Command="{Binding DataOutlineGroupCommandGroup, Mode=OneTime, Source={StaticResource commands}}">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biDataGroupOutline"/>
+                        <dxb:BarButtonItemLink BarItemName="biDataAutoOutline"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem x:Name="biDataGroupOutline" Command="{Binding DataGroupOutline, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biDataAutoOutline" Command="{Binding DataAutoOutline, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarSubItem x:Name="biDataOutlineUngroupCommandGroup" Command="{Binding DataOutlineUngroupCommandGroup, Mode=OneTime, Source={StaticResource commands}}">
+                    <dxb:BarSubItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="biDataUngroupOutline"/>
+                        <dxb:BarButtonItemLink BarItemName="biDataClearOutline"/>
+                    </dxb:BarSubItem.ItemLinks>
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem x:Name="biDataUngroupOutline" Command="{Binding DataUngroupOutline, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biDataClearOutline" Command="{Binding DataClearOutline, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biDataSubtotal" Command="{Binding DataSubtotal, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biDataShowDetail" Command="{Binding DataShowDetail, Mode=OneTime, Source={StaticResource commands}}"/>
+                <dxb:BarButtonItem x:Name="biDataHideDetail" Command="{Binding DataHideDetail, Mode=OneTime, Source={StaticResource commands}}"/>
+            </dxb:BarManager.Items>
+            <DockPanel>
+                <dxr:RibbonControl x:Name="ribbonControl1" DockPanel.Dock="Top" MinimizationButtonVisibility="Collapsed" RibbonStyle="Office2010" ShowApplicationButton="False">
+                    <dxr:RibbonDefaultPageCategory>
+                        <dxr:RibbonPage x:Name="pageFile" Caption="{Binding ConverterParameter=Caption_PageFile, Converter={StaticResource stringIdConverter}, Mode=OneTime, Source={StaticResource stringIdConverter}}">
+                            <dxr:RibbonPageGroup x:Name="grpFileCommon" Caption="{Binding ConverterParameter=Caption_GroupCommon, Converter={StaticResource stringIdConverter}, Mode=OneTime, Source={StaticResource stringIdConverter}}" ShowCaptionButton="False">
+                                <dxr:RibbonPageGroup.ItemLinks>
+                                    <dxb:BarButtonItemLink BarItemName="biFileNew"/>
+                                    <dxb:BarButtonItemLink BarItemName="biFileOpen"/>
+                                    <dxb:BarButtonItemLink BarItemName="biFileSave"/>
+                                    <dxb:BarButtonItemLink BarItemName="biFileSaveAs"/>
+                                    <dxb:BarButtonItemLink BarItemName="biFileQuickPrint"/>
+                                    <dxb:BarButtonItemLink BarItemName="biFilePrint"/>
+                                    <dxb:BarButtonItemLink BarItemName="biFilePrintPreview"/>
+                                    <dxb:BarButtonItemLink BarItemName="biFileUndo"/>
+                                    <dxb:BarButtonItemLink BarItemName="biFileRedo"/>
+                                </dxr:RibbonPageGroup.ItemLinks>
+                            </dxr:RibbonPageGroup>
+                            <dxr:RibbonPageGroup x:Name="grpFileInfo" Caption="{Binding ConverterParameter=Caption_GroupInfo, Converter={StaticResource stringIdConverter}, Mode=OneTime, Source={StaticResource stringIdConverter}}" ShowCaptionButton="False">
+                                <dxr:RibbonPageGroup.ItemLinks>
+                                    <dxb:BarButtonItemLink BarItemName="biFileEncrypt"/>
+                                    <dxb:BarButtonItemLink BarItemName="biFileShowDocumentProperties"/>
+                                </dxr:RibbonPageGroup.ItemLinks>
+                            </dxr:RibbonPageGroup>
+                        </dxr:RibbonPage>
+                        <dxr:RibbonPage x:Name="pageHome" Caption="{Binding ConverterParameter=Caption_PageHome, Converter={StaticResource stringIdConverter}, Mode=OneTime, Source={StaticResource stringIdConverter}}">
+                            <dxr:RibbonPageGroup x:Name="grpHomeClipboard" ShowCaptionButton="False" Caption="{Binding ConverterParameter=Caption_GroupClipboard, Converter={StaticResource stringIdConverter}, Mode=OneTime, Source={StaticResource stringIdConverter}}">
+                                <dxr:RibbonPageGroup.ItemLinks>
+                                    <dxb:BarButtonItemLink BarItemName="biEditPaste"/>
+                                    <dxb:BarButtonItemLink BarItemName="biEditCut"/>
+                                    <dxb:BarButtonItemLink BarItemName="biEditCopy"/>
+                                    <dxb:BarButtonItemLink BarItemName="biEditPasteSpecial"/>
+                                </dxr:RibbonPageGroup.ItemLinks>
+                            </dxr:RibbonPageGroup>
+                            <dxr:RibbonPageGroup x:Name="grpHomeFont" Caption="{Binding ConverterParameter=Caption_GroupFont, Converter={StaticResource stringIdConverter}, Mode=OneTime, Source={StaticResource stringIdConverter}}" CaptionButtonCommand="{Binding FormatCellsFont, Mode=OneTime, Source={StaticResource commands}}">
+                                <dxr:RibbonPageGroup.ItemLinks>
+                                    <dxr:BarButtonGroupLink BarItemName="biFont"/>
+                                    <dxr:BarButtonGroupLink BarItemName="biFontShape"/>
+                                    <dxr:BarButtonGroupLink BarItemName="biFontColor"/>
+                                    <dxr:BarButtonGroupLink BarItemName="bi"/>
+                                </dxr:RibbonPageGroup.ItemLinks>
+                            </dxr:RibbonPageGroup>
+                            <dxr:RibbonPageGroup x:Name="grpHomeAlignment" Caption="{Binding ConverterParameter=Caption_GroupAlignment, Converter={StaticResource stringIdConverter}, Mode=OneTime, Source={StaticResource stringIdConverter}}" CaptionButtonCommand="{Binding FormatCellsAlignment, Mode=OneTime, Source={StaticResource commands}}">
+                                <dxr:RibbonPageGroup.ItemLinks>
+                                    <dxr:BarButtonGroupLink BarItemName="biVerticalAlignment"/>
+                                    <dxr:BarButtonGroupLink BarItemName="biHorizontalAlignment"/>
+                                    <dxr:BarButtonGroupLink BarItemName="biIndent"/>
+                                    <dxb:BarCheckItemLink BarItemName="biFormatWrapText"/>
+                                    <dxb:BarSubItemLink BarItemName="biEditingMergeCellsCommandGroup"/>
+                                </dxr:RibbonPageGroup.ItemLinks>
+                            </dxr:RibbonPageGroup>
+                            <dxr:RibbonPageGroup x:Name="grpHomeNumber" Caption="{Binding ConverterParameter=Caption_GroupNumber, Converter={StaticResource stringIdConverter}, Mode=OneTime, Source={StaticResource stringIdConverter}}" CaptionButtonCommand="{Binding FormatCellsNumber, Mode=OneTime, Source={StaticResource commands}}">
+                                <dxr:RibbonPageGroup.ItemLinks>
+                                    <dxr:BarButtonGroupLink BarItemName="biFormatNumbers"/>
+                                    <dxr:BarButtonGroupLink BarItemName="biFormatNumberDecimals"/>
+                                </dxr:RibbonPageGroup.ItemLinks>
+                            </dxr:RibbonPageGroup>
+                            <dxr:RibbonPageGroup x:Name="grpHomeStyles" ShowCaptionButton="False" Caption="{Binding ConverterParameter=Caption_GroupStyles, Converter={StaticResource stringIdConverter}, Mode=OneTime, Source={StaticResource stringIdConverter}}">
+                                <dxr:RibbonPageGroup.ItemLinks>
+                                    <dxb:BarSubItemLink BarItemName="biConditionalFormattingCommandGroup"/>
+                                </dxr:RibbonPageGroup.ItemLinks>
+                            </dxr:RibbonPageGroup>
+                            <dxr:RibbonPageGroup x:Name="grpHomeCells" ShowCaptionButton="False" Caption="{Binding ConverterParameter=Caption_GroupCells, Converter={StaticResource stringIdConverter}, Mode=OneTime, Source={StaticResource stringIdConverter}}">
+                                <dxr:RibbonPageGroup.ItemLinks>
+                                    <dxb:BarSubItemLink BarItemName="biInsertCellsCommandGroup"/>
+                                    <dxb:BarSubItemLink BarItemName="biRemoveCellsCommandGroup"/>
+                                    <dxb:BarSubItemLink BarItemName="biFormatCommandGroup"/>
+                                </dxr:RibbonPageGroup.ItemLinks>
+                            </dxr:RibbonPageGroup>
+                            <dxr:RibbonPageGroup x:Name="grpHomeEditing" ShowCaptionButton="False" Caption="{Binding ConverterParameter=Caption_GroupEditing, Converter={StaticResource stringIdConverter}, Mode=OneTime, Source={StaticResource stringIdConverter}}">
+                                <dxr:RibbonPageGroup.ItemLinks>
+                                    <dxb:BarSubItemLink BarItemName="biEditingAutoSumCommandGroup"/>
+                                    <dxb:BarSubItemLink BarItemName="biEditingFillCommandGroup"/>
+                                    <dxb:BarSubItemLink BarItemName="biFormatClearCommandGroup"/>
+                                    <dxb:BarSubItemLink BarItemName="biEditingSortAndFilterCommandGroup"/>
+                                    <dxb:BarSubItemLink BarItemName="biEditingFindAndSelectCommandGroup"/>
+                                </dxr:RibbonPageGroup.ItemLinks>
+                            </dxr:RibbonPageGroup>
+                        </dxr:RibbonPage>
+                        <dxr:RibbonPage x:Name="pageData" Caption="{Binding ConverterParameter=Caption_PageData, Converter={StaticResource stringIdConverter}, Mode=OneTime, Source={StaticResource stringIdConverter}}">
+                            <dxr:RibbonPageGroup x:Name="grpDataSortFilter" Caption="{Binding ConverterParameter=Caption_GroupSortAndFilter, Converter={StaticResource stringIdConverter}, Mode=OneTime, Source={StaticResource stringIdConverter}}" ShowCaptionButton="False">
+                                <dxr:RibbonPageGroup.ItemLinks>
+                                    <dxb:BarButtonItemLink BarItemName="biDataSortAscending"/>
+                                    <dxb:BarButtonItemLink BarItemName="biDataSortDescending"/>
+                                    <dxb:BarCheckItemLink BarItemName="biDataFilterToggle"/>
+                                    <dxb:BarButtonItemLink BarItemName="biDataFilterClear"/>
+                                    <dxb:BarButtonItemLink BarItemName="biDataFilterReApply"/>
+                                </dxr:RibbonPageGroup.ItemLinks>
+                            </dxr:RibbonPageGroup>
+                            <dxr:RibbonPageGroup x:Name="grpDataDataTools" Caption="{Binding ConverterParameter=Caption_GroupDataTools, Converter={StaticResource stringIdConverter}, Mode=OneTime, Source={StaticResource stringIdConverter}}" ShowCaptionButton="False">
+                                <dxr:RibbonPageGroup.ItemLinks>
+                                    <dxb:BarSubItemLink BarItemName="biDataValidationCommandGroup"/>
+                                </dxr:RibbonPageGroup.ItemLinks>
+                            </dxr:RibbonPageGroup>
+                            <dxr:RibbonPageGroup x:Name="grpDataOutline" CaptionButtonCommand="{Binding DataOutlineSetting, Mode=OneTime, Source={StaticResource commands}}" Caption="{Binding ConverterParameter=Caption_GroupOutline, Converter={StaticResource stringIdConverter}, Mode=OneTime, Source={StaticResource stringIdConverter}}">
+                                <dxr:RibbonPageGroup.ItemLinks>
+                                    <dxb:BarSubItemLink BarItemName="biDataOutlineGroupCommandGroup"/>
+                                    <dxb:BarSubItemLink BarItemName="biDataOutlineUngroupCommandGroup"/>
+                                    <dxb:BarButtonItemLink BarItemName="biDataSubtotal"/>
+                                    <dxb:BarButtonItemLink BarItemName="biDataShowDetail"/>
+                                    <dxb:BarButtonItemLink BarItemName="biDataHideDetail"/>
+                                </dxr:RibbonPageGroup.ItemLinks>
+                            </dxr:RibbonPageGroup>
+                        </dxr:RibbonPage>
+                        <dxr:RibbonPage x:Name="barPageExample" Caption="Example">
+                            <dxr:RibbonPageGroup Caption="Data Binding">
+                                <dxb:BarButtonItem x:Name="barBtnBindWeather" Content="Bind Weather Report (List)" LargeGlyph="{dx:DXImageOffice2013 Image=AddNewDataSource_32x32.png}" ItemClick="barBtnBindWeather_ItemClick"/>
+                                <dxb:BarButtonItem x:Name="barBtnWeatherBindingList" Content="Bind Weather Report (Binding List)" Glyph="{dx:DXImageOffice2013 Image=AddNewDataSource_32x32.png}" LargeGlyph="{dx:DXImageOffice2013 Image=AddNewDataSource_32x32.png}" ItemClick="barBtnWeatherBindingList_ItemClick"/>
+                                <dxb:BarButtonItem x:Name="barBtnAddWeatherReport" Content="Add Weather Report" Glyph="{dx:DXImageOffice2013 Image=Add_16x16.png}" ItemClick="barBtnAddWeatherReport_ItemClick"/>
+                                <dxb:BarButtonItem x:Name="barBtnBindMyFishes" Content="Bind My Fishes (Read-Only Collection)" LargeGlyph="{dx:DXImageOffice2013 Image=AddNewDataSource_32x32.png}" ItemClick="barBtnBindMyFishes_ItemClick"/>
+                                <dxb:BarButtonItem x:Name="barBtnImport" Content="Import My Fishes" LargeGlyph="{dx:DXImageOffice2013 Image=AddItem_32x32.png}" ItemClick="barBtnImport_ItemClick"/>
+                                <dxb:BarButtonItem x:Name="barBtnUnbind" Content="Unbind All" LargeGlyph="{dx:DXImageOffice2013 Image=DeleteDataSource_32x32.png}" ItemClick="barBtnUnbind_ItemClick"/>
+                            </dxr:RibbonPageGroup>
+                        </dxr:RibbonPage>
+                    </dxr:RibbonDefaultPageCategory>
+                </dxr:RibbonControl>
+                <dxsps:SpreadsheetControl x:Name="spreadsheetControl1" BarManager="{Binding ElementName=barManager1, Mode=OneTime}" Ribbon="{Binding ElementName=ribbonControl1, Mode=OneTime}" />
+            </DockPanel>
+        </dxb:BarManager>
+    </Grid>
+</dxr:DXRibbonWindow>
