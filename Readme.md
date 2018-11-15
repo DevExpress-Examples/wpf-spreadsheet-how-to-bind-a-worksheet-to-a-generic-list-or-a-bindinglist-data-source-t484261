@@ -1,3 +1,11 @@
+<!-- default file list -->
+*Files to look at*:
+
+* [MainWindow.xaml](./CS/DataBindingToListExample/MainWindow.xaml) (VB: [MainWindow.xaml.vb](./VB/DataBindingToListExample/MainWindow.xaml.vb))
+* [MainWindow.xaml.cs](./CS/DataBindingToListExample/MainWindow.xaml.cs) (VB: [MainWindow.xaml.vb](./VB/DataBindingToListExample/MainWindow.xaml.vb))
+* [MyConverter.cs](./CS/DataBindingToListExample/MyConverter.cs) (VB: [MyConverter.vb](./VB/DataBindingToListExample/MyConverter.vb))
+* [WeatherReport.cs](./CS/DataBindingToListExample/WeatherReport.cs) (VB: [WeatherReport.vb](./VB/DataBindingToListExample/WeatherReport.vb))
+<!-- default file list end -->
 # WPF Spreadsheet: How to bind a worksheet to a generic list or a BindingList data source
 
 
